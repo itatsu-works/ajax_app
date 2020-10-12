@@ -8,4 +8,16 @@ class PostsController < ApplicationController
     Post.create(content: params[:content])
     redirect_to action: :index
   end
+
+  def checked #既読をチェックする
+    post = Post.find(params[:id]) #idを受け取る
+    if post.checked
+      post.update(checked: false)
+    else
+      post.update(checked: true)
+    end
+
+    item = Post.find(params[:id])
+    render json: { post: item }
+  end
 end
