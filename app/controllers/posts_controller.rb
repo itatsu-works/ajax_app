@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-
   def index
     @posts = Post.all.order(id: "DESC")
   end
@@ -9,8 +8,9 @@ class PostsController < ApplicationController
     redirect_to action: :index
   end
 
-  def checked #既読をチェックする
-    post = Post.find(params[:id]) #idを受け取る
+  def checked
+    # binding.pry
+    post = Post.find(params[:id])
     if post.checked
       post.update(checked: false)
     else
@@ -20,4 +20,5 @@ class PostsController < ApplicationController
     item = Post.find(params[:id])
     render json: { post: item }
   end
+
 end
